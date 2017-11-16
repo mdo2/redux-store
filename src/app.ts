@@ -11,19 +11,19 @@ const store = new fromStore.Store({}, {
   todos: [{ label: 'Eat pizza', complete: false }]
 });
 
-console.log(store.value);
-
 button.addEventListener('click', () => {
-    if (input.value.trim()) {
+  if (input.value.trim()) {
 
-      const payload = { label: input.value, complete: false };
+    const payload = { label: input.value, complete: false };
 
-      console.log(payload);
+    store.dispatch({
+      type: 'ADD_TODO',
+      payload
+    });
 
-      input.value = '';
-    }
-  }, false
-);
+    input.value = '';
+  }
+}, false);
 
 todoList.addEventListener('click', function(event) {
   const target = event.target as HTMLButtonElement;
