@@ -1,3 +1,5 @@
+import * as fromStore from './store';
+
 import { renderTodos } from './utils';
 
 const input = document.querySelector('input') as HTMLInputElement;
@@ -5,18 +7,22 @@ const button = document.querySelector('button') as HTMLButtonElement;
 const destroy = document.querySelector('.unsubscribe') as HTMLButtonElement;
 const todoList = document.querySelector('.todos') as HTMLLIElement;
 
-button.addEventListener(
-  'click',
-  () => {
-    if (!input.value.trim()) return;
+const store = new fromStore.Store({}, {
+  todos: [{ label: 'Eat pizza', complete: false }]
+});
 
-    const payload = { label: input.value, complete: false };
+console.log(store.value);
 
-    console.log(payload);
+button.addEventListener('click', () => {
+    if (input.value.trim()) {
 
-    input.value = '';
-  },
-  false
+      const payload = { label: input.value, complete: false };
+
+      console.log(payload);
+
+      input.value = '';
+    }
+  }, false
 );
 
 todoList.addEventListener('click', function(event) {
